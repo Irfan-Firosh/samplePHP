@@ -23,11 +23,6 @@
                 alert("Please enter a vaild email");
                 return false;
             }
-            /* $(document).ready(function() {
-                $("#submit-but").click(function() {
-                    alert()
-                });
-            }); */
         }
     </script>
 </head>
@@ -56,8 +51,13 @@
         if ($result->num_rows != 0) {
             $row = $result->fetch_assoc();
             if ($row['password'] == $userpass) {
-                header("Location: ../dashboard-user.php");
-                die();
+                if ($usermail == "admin@gmail.com") {
+                    header("Location: ../dashboard-admin.php");  
+                    die(); 
+                } else {
+                    header("Location: ../dashboard-user.php");
+                    die();
+                }
             }
             else {
                 echo "<div class='invalid' style='margin-left: 650px; padding: left 100px; width: 150px; height: 50px; background-color: red; border-radius: 15px; display: flex; align-items: center; justify-content: center; text-align: center;'>Invalid Credentials</div>";
