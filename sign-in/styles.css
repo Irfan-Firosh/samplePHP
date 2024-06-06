@@ -1,0 +1,33 @@
+.login {
+    text-align: center;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+span {
+    color: red;
+}
+
+label {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+}
+
+form {
+    border: 3px solid #f1f1f1;
+    padding:20px;
+}
+
+.centered-div {
+    width: 300px;
+    height: 200px;
+    background-color: lightblue;
+    border-radius: 15px; /* This makes the edges rounded */
+    display: flex;
+
+}
