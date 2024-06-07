@@ -15,6 +15,7 @@
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             echo "Email already exists: ";
+            return false;
         }
     }
     ?>
@@ -25,7 +26,7 @@
             <br>
             <br>
             <label for="fmail">Email: </label>
-            <input type="text" name="fmail"> <span>*</span>
+            <input type="email" name="fmail"> <span>*</span>
             <br>
             <span style="font-size:smaller"><?php checkMail($_POST['fmail']) ?></span>
             <br>
@@ -48,14 +49,18 @@
             $name = htmlspecialchars($_POST['fname']);
             $mail = htmlspecialchars($_POST['fmail']);
             $number = htmlspecialchars($_POST['fnum']);
-            $fpass = htmlspecialchars($_POST['fpass']);
-
-
+/*             $fpass = htmlspecialchars($_POST['fpass']); */
+            $fpass = hash('sha256', htmlspecialchars($_POST['fpass']));
 
             //Establishing connection to database
             $conn = new mysqli("localhost", "root", "", "practicePHP");
             if ($conn->connect_error) {
                 print "Error connecting to the server";
+            }
+            $sql = "SELECT email FROM credentials WHERE email='$mail'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                exit();
             }
             $sql = "INSERT INTO credentials (username, email, mobile, password) VALUES ('$name', '$mail', '$number', '$fpass')";
 

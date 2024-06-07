@@ -28,7 +28,7 @@
 </head>
 <body>
     <div class="login">
-        <form action="<?php echo $_SERVER["PHP_SELF"]?>" onsubmit="return validateLogin()" name="lform" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>" onsubmit="return validateLogin()" name="lform" method="post">
             <label for="fmail">Email Id: </label>
             <input type="text" name="fmail"> <span>*</span>
             <br>
@@ -44,7 +44,7 @@
     <?php
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $usermail = $_POST['fmail'];
-        $userpass = $_POST['fpass'];
+        $userpass = hash('sha256', htmlspecialchars($_POST['fpass']));
         $conn = new mysqli("localhost", "root", "", "practicePHP");
         $sql = "SELECT email, password FROM credentials where email='$usermail';";
         $result = $conn->query($sql);

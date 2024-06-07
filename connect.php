@@ -6,17 +6,9 @@ $dbms = "practicePHP";
 
 $conn = new mysqli($servername, $username, $password, $dbms);
 
-$name = "test";
-$mail = "john@doe";
-$number = "+971";
-$fpass = "fpass";
+$sql = "ALTER TABLE credentials MODIFY COLUMN `password` VARCHAR(256)";
 
-$mail = "motish@gmail.com";
-
-$sql = "SELECT email FROM credentials WHERE email='$mail'";
-
-$result = $conn->query($sql);
-print $result->num_rows;
+$conn->query($sql);
 
 
 ?>
